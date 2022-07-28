@@ -208,9 +208,12 @@ export default function FundDetailsPage({
 }
 
 export const getServerSideProps: GetServerSideProps<FundDetailsProps> = async (
-  ctx,
+  ctx
 ) => {
- 
+  ctx.res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
   const fundId = ctx.params?.id
   const fundDetailsRes = await sendRequest(
     `http://174.138.123.10:8000/api/funds/${fundId}`, 'get'
@@ -236,10 +239,6 @@ export const getServerSideProps: GetServerSideProps<FundDetailsProps> = async (
 
 const sendRequest=(url: string, method: string)=> {
   const myHeaders = new Headers();
-  myHeaders.append(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
 
   const options = {
       method: method,

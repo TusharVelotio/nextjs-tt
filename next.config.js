@@ -10,10 +10,6 @@ const nextConfig = {
         source: '/fund',
         headers: [
           {
-            key: 'Cache-Control',
-            value:'public, s-maxage=10, stale-while-revalidate=59',
-          },
-          {
             key: 'x-another-custom-header',
             value: 'my other custom header value',
           },
